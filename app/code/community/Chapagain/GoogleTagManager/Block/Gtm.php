@@ -100,7 +100,7 @@ class Chapagain_GoogleTagManager_Block_Gtm extends Mage_Core_Block_Template
 			 * English locale price = 1,230.55 becomes the following in Dutch locale:
 			 * Dutch locale price = 1.230,55
 			 */
-			$objProduct->price = (string) Mage::app()->getLocale()->getNumber(Mage::helper('tax')->getPrice($product, $product->getFinalPrice(), true));
+			$objProduct->price = (float) Mage::app()->getLocale()->getNumber(Mage::helper('tax')->getPrice($product, $product->getFinalPrice(), true));
 			
 			$objProduct->category = implode('|', $categories);
 			
@@ -155,7 +155,7 @@ class Chapagain_GoogleTagManager_Block_Gtm extends Mage_Core_Block_Template
 				
 				//$productItem['price'] = Mage::getModel('directory/currency')->formatTxt($item->getBasePrice(), array('display' => Zend_Currency::NO_SYMBOL));				
 				//$productItem['price'] = str_replace(',', '', Mage::getModel('directory/currency')->formatTxt($item->getBasePrice(), array('display' => Zend_Currency::NO_SYMBOL)));
-				$productItem['price'] = (string) Mage::app()->getLocale()->getNumber($item->getBasePrice());
+				$productItem['price'] = (float) Mage::app()->getLocale()->getNumber($item->getBasePrice());
 				
 				$productItem['category'] = implode('|', $categories);
 				$productItem['quantity'] = intval($item->getQtyOrdered()); // converting qty from decimal to integer
@@ -169,7 +169,7 @@ class Chapagain_GoogleTagManager_Block_Gtm extends Mage_Core_Block_Template
 				
 				//$objItem['price'] = Mage::getModel('directory/currency')->formatTxt($item->getBasePrice(), array('display' => Zend_Currency::NO_SYMBOL));
 				//$objItem['price'] = str_replace(',', '', Mage::getModel('directory/currency')->formatTxt($item->getBasePrice(), array('display' => Zend_Currency::NO_SYMBOL)));
-				$objItem['price'] = (string) Mage::app()->getLocale()->getNumber($item->getBasePrice());
+				$objItem['price'] = (float) Mage::app()->getLocale()->getNumber($item->getBasePrice());
 				
 				$objItem['quantity'] = intval($item->getQtyOrdered()); // converting qty from decimal to integer
 				$aItems[] = (object) $objItem;
@@ -177,7 +177,7 @@ class Chapagain_GoogleTagManager_Block_Gtm extends Mage_Core_Block_Template
 			
 			$objOrder = new stdClass();
 			
-			$objOrder->transactionId = $order->getIncrementId();
+			$objOrder->transactionId = (int) $order->getIncrementId();
 			$objOrder->transactionAffiliation = Mage::app()->getStore()->getFrontendName();
 			
 			//$objOrder->transactionTotal = Mage::getModel('directory/currency')->formatTxt($order->getBaseGrandTotal(), array('display' => Zend_Currency::NO_SYMBOL));
@@ -198,7 +198,7 @@ class Chapagain_GoogleTagManager_Block_Gtm extends Mage_Core_Block_Template
 			$objOrder->ecommerce = new stdClass();
 			$objOrder->ecommerce->purchase = new stdClass();
 			$objOrder->ecommerce->purchase->actionField = new stdClass();
-			$objOrder->ecommerce->purchase->actionField->id = $order->getIncrementId();
+			$objOrder->ecommerce->purchase->actionField->id = (int) $order->getIncrementId();
 			$objOrder->ecommerce->purchase->actionField->affiliation = Mage::app()->getStore()->getFrontendName();
 			
 			//$objOrder->ecommerce->purchase->actionField->revenue = Mage::getModel('directory/currency')->formatTxt($order->getBaseGrandTotal(), array('display' => Zend_Currency::NO_SYMBOL));
