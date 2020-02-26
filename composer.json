@@ -1,5 +1,5 @@
 {
-    "name": "GorbunovStudio/google-tag-manager-magento1",
+    "name": "gorbunovstudio/google-tag-manager-magento1",
     "description": "Google Tag Manager - Extension for Magento 1.x",
     "type": "magento-module",
     "authors": [
